@@ -25,7 +25,7 @@ public class App {
 
     public App() {
         try {
-            client = new CerbosClientBuilder("localhost:3593").withPlaintext().buildBlockingClient();
+            client = new CerbosClientBuilder("localhost:3592").withPlaintext().buildBlockingClient();
         }
         catch (Exception ex) {
             throw new RuntimeException("Cerbos is not configured correctly!", ex);
@@ -35,7 +35,8 @@ public class App {
     public boolean authorized(String action) {
         CheckResult result = client.check(
             Principal.newInstance("john","user"),       // Principal
-            Resource.newInstance("greeting"));          // Resource
+            Resource.newInstance("greeting"),           // Resource
+            action);
 
         return result.isAllowed(action);                // Action
     }
@@ -63,7 +64,7 @@ public class App {
 
         // Let's pretend this is really secure
         System.out.println("Please type in your username: ");
-        String str1 = sc.nextLine();  
+        String str1 = sc.nextLine();
         System.out.println("Please type in your user role: ");
         String str2 = sc.nextLine();
         app.user = new User(str1, str2);

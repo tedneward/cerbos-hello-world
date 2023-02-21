@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker run -i -t ghcr.io/cerbos/cerbos:0.24.0 server
+docker run --rm --name cerbos -i -t -v $(pwd)/policies:/policies -p 3592:3592 ghcr.io/cerbos/cerbos:latest server
